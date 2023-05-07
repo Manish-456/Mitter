@@ -30,7 +30,8 @@ export default async function handler(
         if(userId && typeof userId === "string"){
             posts = await prisma.post.findMany({
                 where : {userId},
-                include : {user : true, comments : true}, // populating user and comments
+                include : {user : true,
+                     comments : true}, // populating user and comments
                 orderBy : {createdAt : 'desc'} 
             })
         }else{
@@ -39,6 +40,8 @@ export default async function handler(
                 orderBy : {createdAt : 'desc'}
             })
         }
+
+        
         return res.status(200).json(posts)
       }
   } catch (error) {

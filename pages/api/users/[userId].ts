@@ -12,14 +12,16 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse){
         const user = await prisma.user.findUnique({
             where : {
                 id : userId
-            }
+            }, 
+      
         })
         const followersCount = await prisma.user.count({
             where : {followingIds : {
                 has : userId
             }}
         })
-        return res.status(200).json({...user, followersCount})
+        const { password, ...sanitizedUser } = user as any;
+        return res.status(200).json({...sanitizedUser, followersCount})
     } catch (error) {
 
         return res.status(500).json({msg : "Internal Server error"})

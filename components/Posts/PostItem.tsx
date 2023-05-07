@@ -22,12 +22,12 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
       event.stopPropagation();
       router.push(`/users/${data.user.id}`);
     },
-    [router, data.user.id]
+    [router, data?.user?.id]
   );
 
   const goToPost = useCallback(() => {
-    router.push(`/posts/${data.id}`);
-  }, [router, data.id]);
+    router.push(`/posts/${data?.id}`);
+  }, [router, data?.id]);
 
   const onLike = useCallback(
     (event: any) => {
@@ -61,7 +61,7 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
                 className="text-white font-semibold cursor-pointer hover:underline
                 "
               >
-                {data.user.name}
+                {data?.user?.name}
               </p>
               <span
                 className="
@@ -72,7 +72,7 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
                 md:block"
                 onClick={goToUser}
               >
-                @{data.user.username}
+                @{data?.user?.username}
               </span>
             </div>
             <div>
